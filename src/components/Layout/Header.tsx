@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FiEdit3, FiSun, FiMoon } from 'react-icons/fi';
+import { FiEdit3, FiSun, FiMoon, FiHome } from 'react-icons/fi';
 import { useTheme } from '../../hooks/useTheme';
 
 const Header: React.FC = () => {
@@ -16,6 +16,15 @@ const Header: React.FC = () => {
       </Link>
 
       <div className="flex items-center gap-3">
+        {isEditor && (
+          <Link
+            to="/"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors text-sm font-medium"
+          >
+            <FiHome size={16} />
+            <span>首页</span>
+          </Link>
+        )}
         {!isEditor && (
           <Link
             to="/editor"
