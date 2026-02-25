@@ -2,8 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import { exportRouter } from './routes/export.routes.js';
-import { errorMiddleware } from './middlewares/error.middleware.js';
+import { exportRouter } from './routes/export.routes';
+import { errorMiddleware } from './middlewares/error.middleware';
 
 const app = express();
 const PORT = process.env.PORT || 3001;

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { WordService } from '../services/word.service.js';
-import { ExcelService } from '../services/excel.service.js';
-import { PdfService } from '../services/pdf.service.js';
+import { WordService } from '../services/word.service';
+import { ExcelService } from '../services/excel.service';
+import { PdfService } from '../services/pdf.service';
 
 export class ExportController {
   private wordService = new WordService();

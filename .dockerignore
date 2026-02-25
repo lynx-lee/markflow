@@ -1,0 +1,10 @@
+node_modules
+server/node_modules
+dist
+server/dist
+.git
+.DS_Store
+*.log
+.env.local
+需求与设计
+.codebuddy
