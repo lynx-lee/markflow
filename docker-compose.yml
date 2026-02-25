@@ -1,5 +1,9 @@
+name: markflow
+
 services:
   frontend:
+    container_name: markflow-frontend
+    image: markflow/frontend:latest
     build:
       context: .
       dockerfile: Dockerfile.frontend
@@ -11,6 +15,8 @@ services:
     restart: unless-stopped
 
   server:
+    container_name: markflow-server
+    image: markflow/server:latest
     build:
       context: .
       dockerfile: Dockerfile.server

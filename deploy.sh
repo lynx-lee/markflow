@@ -32,15 +32,23 @@ log_step()  { echo -e "${CYAN}[STEP]${NC}  $1"; }
 # 切换到项目根目录
 cd "$(dirname "$0")"
 
-# 检查 docker 和 docker compose
+# 检测 docker compose 命令（V2 优先，兼容 V1）
+DOCKER_COMPOSE=""
+
 check_deps() {
     if ! command -v docker &>/dev/null; then
         log_error "未检测到 docker，请先安装 Docker"
         exit 1
     fi
 
-    if ! docker compose version &>/dev/null; then
-        log_error "未检测到 docker compose，请升级 Docker 或安装 docker-compose-plugin"
+    if docker compose version &>/dev/null; then
+        DOCKER_COMPOSE="docker compose"
+        log_info "使用 docker compose (V2)"
+    elif command -v docker-compose &>/dev/null; then
+        DOCKER_COMPOSE="docker-compose"
+        log_info "使用 docker-compose (V1)"
+    else
+        log_error "未检测到 docker compose 或 docker-compose，请安装后重试"
         exit 1
     fi
 }
@@ -48,15 +56,14 @@ check_deps() {
 # 构建镜像
 do_build() {
     log_step "构建 Docker 镜像..."
-    docker compose -f "$COMPOSE_FILE" build --parallel
+    $DOCKER_COMPOSE -f "$COMPOSE_FILE" build --parallel
     log_info "镜像构建完成"
 }
 
 # 启动服务
 do_start() {
     log_step "启动服务..."
-    docker compose -f "$COMPOSE_FILE" up -d
-    log_info "服务已启动"
+    $DOCKER_COMPOSE -f "$COMPOSE_FILE" up -d
     wait_for_healthy
     show_access_info
 }
@@ -64,15 +71,15 @@ do_start() {
 # 停止服务
 do_stop() {
     log_step "停止服务..."
-    docker compose -f "$COMPOSE_FILE" down
+    $DOCKER_COMPOSE -f "$COMPOSE_FILE" down
     log_info "服务已停止"
 }
 
 # 重启服务
 do_restart() {
     log_step "重启服务..."
-    docker compose -f "$COMPOSE_FILE" down
-    docker compose -f "$COMPOSE_FILE" up -d
+    $DOCKER_COMPOSE -f "$COMPOSE_FILE" down
+    $DOCKER_COMPOSE -f "$COMPOSE_FILE" up -d
     log_info "服务已重启"
     wait_for_healthy
     show_access_info
@@ -80,18 +87,18 @@ do_restart() {
 
 # 查看日志
 do_logs() {
-    docker compose -f "$COMPOSE_FILE" logs -f --tail=100
+    $DOCKER_COMPOSE -f "$COMPOSE_FILE" logs -f --tail=100
 }
 
 # 查看状态
 do_status() {
-    docker compose -f "$COMPOSE_FILE" ps
+    $DOCKER_COMPOSE -f "$COMPOSE_FILE" ps
 }
 
 # 清理
 do_clean() {
     log_step "停止并清理所有容器和镜像..."
-    docker compose -f "$COMPOSE_FILE" down --rmi local --volumes --remove-orphans
+    $DOCKER_COMPOSE -f "$COMPOSE_FILE" down --rmi local --volumes --remove-orphans
     log_info "清理完成"
 }
 
@@ -102,7 +109,7 @@ wait_for_healthy() {
     local count=0
     while [ $count -lt $retries ]; do
         local health
-        health=$(docker compose -f "$COMPOSE_FILE" ps server --format json 2>/dev/null | grep -o '"Health":"[^"]*"' | head -1 || true)
+        health=$($DOCKER_COMPOSE -f "$COMPOSE_FILE" ps server --format json 2>/dev/null | grep -o '"Health":"[^"]*"' | head -1 || true)
         if echo "$health" | grep -q "healthy"; then
             log_info "后端服务健康检查通过"
             return 0
