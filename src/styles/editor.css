@@ -1,0 +1,36 @@
+.cm-editor {
+  height: 100%;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.cm-editor .cm-scroller {
+  overflow: auto;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+.cm-editor .cm-content {
+  padding: 16px 8px;
+}
+
+.cm-editor .cm-gutters {
+  border-right: 1px solid #e5e7eb;
+  background-color: #fafafa;
+}
+
+.dark .cm-editor .cm-gutters {
+  border-right: 1px solid #374151;
+  background-color: #1f2937;
+}
+
+.cm-editor .cm-activeLineGutter {
+  background-color: #e5e7eb;
+}
+
+.dark .cm-editor .cm-activeLineGutter {
+  background-color: #374151;
+}
+
+.cm-editor.cm-focused {
+  outline: none;
+}
