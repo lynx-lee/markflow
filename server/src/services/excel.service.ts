@@ -20,8 +20,9 @@ export class ExcelService {
       this.writeContentAsText(sheet, markdownContent);
     } else {
       tables.forEach((table, index) => {
-        const sheetName = table.title || `表格 ${index + 1}`;
-        const sheet = workbook.addWorksheet(sheetName.substring(0, 31));
+        const rawName = table.title || `表格 ${index + 1}`;
+        const sheetName = this.sanitizeSheetName(rawName);
+        const sheet = workbook.addWorksheet(sheetName);
         this.writeTable(sheet, table);
       });
     }
@@ -131,6 +132,19 @@ export class ExcelService {
         to: { row: 1, column: table.headers.length },
       };
     }
+  }
+
+  /**
+   * 清理工作表名称：移除 Markdown 标记和 Excel 非法字符，截断至 31 字符
+   */
+  private sanitizeSheetName(name: string): string {
+    return name
+      .replace(/\*\*/g, '')        // 移除 Markdown 粗体 **
+      .replace(/\*/g, '')          // 移除 Markdown 斜体 *
+      .replace(/[?:\\/\[\]]/g, '') // 移除 Excel 非法字符
+      .replace(/\s+/g, ' ')       // 合并多余空格
+      .trim()
+      .substring(0, 31) || 'Sheet';
   }
 
   private writeContentAsText(sheet: ExcelJS.Worksheet, content: string): void {
