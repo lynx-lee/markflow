@@ -13,12 +13,13 @@ marked.setOptions({
 });
 
 const renderer = new marked.Renderer();
-renderer.code = ({ text, lang }: { text: string; lang?: string }) => {
+(renderer as any).code = function (code: string, infostring: string | undefined) {
+  const lang = (infostring || '').trim();
   if (lang && hljs.getLanguage(lang)) {
-    const highlighted = hljs.highlight(text, { language: lang }).value;
+    const highlighted = hljs.highlight(code, { language: lang }).value;
     return `<pre><code class="hljs language-${lang}">${highlighted}</code></pre>`;
   }
-  const highlighted = hljs.highlightAuto(text).value;
+  const highlighted = hljs.highlightAuto(code).value;
   return `<pre><code class="hljs">${highlighted}</code></pre>`;
 };
 
