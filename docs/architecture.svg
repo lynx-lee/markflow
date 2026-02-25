@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 820" font-family="'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <!-- 渐变定义 -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="browserGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#dbeafe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#bfdbfe;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="nginxGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#d1fae5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a7f3d0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="serverGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fde68a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="serviceGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fce7f3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fbcfe8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="storageGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e0e7ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c7d2fe;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="dockerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#cffafe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a5f3fc;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- 阴影 -->
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00000018"/>
+    </filter>
+    <filter id="shadowLight" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#00000010"/>
+    </filter>
+
+    <!-- 箭头 -->
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#64748b">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#3b82f6">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#10b981">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+    <marker id="arrowAmber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#f59e0b">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+    <marker id="arrowPink" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#ec4899">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1100" height="820" rx="16" fill="url(#bgGrad)" />
+
+  <!-- 标题 -->
+  <text x="550" y="42" text-anchor="middle" font-size="22" font-weight="700" fill="#1e293b">MarkFlow 系统架构图</text>
+  <text x="550" y="64" text-anchor="middle" font-size="13" fill="#64748b">在线 Markdown 编辑器 — 实时预览 · 多格式导出 · 明暗主题</text>
+
+  <!-- ==================== 浏览器层 ==================== -->
+  <rect x="40" y="88" width="1020" height="260" rx="14" fill="url(#browserGrad)" stroke="#93c5fd" stroke-width="1.5" filter="url(#shadow)" />
+  <text x="60" y="112" font-size="14" font-weight="700" fill="#1d4ed8">🌐 浏览器 (Client)</text>
+
+  <!-- React SPA -->
+  <rect x="70" y="128" width="200" height="90" rx="10" fill="#fff" stroke="#93c5fd" stroke-width="1" filter="url(#shadowLight)" />
+  <text x="170" y="155" text-anchor="middle" font-size="13" font-weight="600" fill="#1e40af">React 18 SPA</text>
+  <text x="170" y="175" text-anchor="middle" font-size="11" fill="#3b82f6">TypeScript + Vite</text>
+  <text x="170" y="193" text-anchor="middle" font-size="11" fill="#3b82f6">React Router 路由</text>
+
+  <!-- CodeMirror 编辑器 -->
+  <rect x="300" y="128" width="200" height="90" rx="10" fill="#fff" stroke="#93c5fd" stroke-width="1" filter="url(#shadowLight)" />
+  <text x="400" y="155" text-anchor="middle" font-size="13" font-weight="600" fill="#1e40af">CodeMirror 6</text>
+  <text x="400" y="175" text-anchor="middle" font-size="11" fill="#3b82f6">Markdown 编辑器内核</text>
+  <text x="400" y="193" text-anchor="middle" font-size="11" fill="#3b82f6">语法高亮 · 代码折叠</text>
+
+  <!-- 预览渲染 -->
+  <rect x="530" y="128" width="200" height="90" rx="10" fill="#fff" stroke="#93c5fd" stroke-width="1" filter="url(#shadowLight)" />
+  <text x="630" y="155" text-anchor="middle" font-size="13" font-weight="600" fill="#1e40af">预览引擎</text>
+  <text x="630" y="175" text-anchor="middle" font-size="11" fill="#3b82f6">marked + highlight.js</text>
+  <text x="630" y="193" text-anchor="middle" font-size="11" fill="#3b82f6">DOMPurify XSS 过滤</text>
+
+  <!-- Zustand 状态管理 -->
+  <rect x="760" y="128" width="200" height="90" rx="10" fill="#fff" stroke="#93c5fd" stroke-width="1" filter="url(#shadowLight)" />
+  <text x="860" y="155" text-anchor="middle" font-size="13" font-weight="600" fill="#1e40af">Zustand Store</text>
+  <text x="860" y="175" text-anchor="middle" font-size="11" fill="#3b82f6">状态管理 + persist</text>
+  <text x="860" y="193" text-anchor="middle" font-size="11" fill="#3b82f6">editorStore · uiStore</text>
+
+  <!-- 前端内部连线 -->
+  <line x1="270" y1="173" x2="300" y2="173" stroke="#93c5fd" stroke-width="1.5" marker-end="url(#arrowBlue)" />
+  <line x1="500" y1="173" x2="530" y2="173" stroke="#93c5fd" stroke-width="1.5" marker-end="url(#arrowBlue)" />
+  <line x1="730" y1="173" x2="760" y2="173" stroke="#93c5fd" stroke-width="1.5" marker-end="url(#arrowBlue)" />
+
+  <!-- 前端导出（HTML/MD） -->
+  <rect x="70" y="240" width="230" height="52" rx="8" fill="#fff" stroke="#93c5fd" stroke-width="1" filter="url(#shadowLight)" />
+  <text x="185" y="262" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">📄 前端导出 (HTML / MD)</text>
+  <text x="185" y="280" text-anchor="middle" font-size="11" fill="#64748b">file-saver 直接下载</text>
+
+  <!-- Tailwind CSS -->
+  <rect x="330" y="240" width="170" height="52" rx="8" fill="#fff" stroke="#93c5fd" stroke-width="1" filter="url(#shadowLight)" />
+  <text x="415" y="262" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">🎨 Tailwind CSS</text>
+  <text x="415" y="280" text-anchor="middle" font-size="11" fill="#64748b">响应式 · 明暗主题</text>
+
+  <!-- Axios -->
+  <rect x="530" y="240" width="170" height="52" rx="8" fill="#fff" stroke="#93c5fd" stroke-width="1" filter="url(#shadowLight)" />
+  <text x="615" y="262" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">🔗 Axios</text>
+  <text x="615" y="280" text-anchor="middle" font-size="11" fill="#64748b">HTTP 请求 /api/*</text>
+
+  <!-- localStorage -->
+  <rect x="730" y="240" width="230" height="52" rx="8" fill="url(#storageGrad)" stroke="#818cf8" stroke-width="1" filter="url(#shadowLight)" />
+  <text x="845" y="262" text-anchor="middle" font-size="12" font-weight="600" fill="#4338ca">💾 localStorage</text>
+  <text x="845" y="280" text-anchor="middle" font-size="11" fill="#64748b">文档持久化 · 自动保存</text>
+
+  <!-- Zustand → localStorage 连线 -->
+  <line x1="860" y1="218" x2="860" y2="240" stroke="#818cf8" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="4 3" />
+
+  <!-- ==================== Nginx 层 ==================== -->
+  <rect x="340" y="380" width="420" height="70" rx="12" fill="url(#nginxGrad)" stroke="#6ee7b7" stroke-width="1.5" filter="url(#shadow)" />
+  <text x="550" y="407" text-anchor="middle" font-size="14" font-weight="700" fill="#065f46">🟢 Nginx :80</text>
+  <text x="440" y="430" text-anchor="middle" font-size="11" fill="#047857">/ → 静态文件 (SPA)</text>
+  <text x="660" y="430" text-anchor="middle" font-size="11" fill="#047857">/api/* → Express 后端</text>
+  <line x1="550" y1="413" x2="550" y2="440" stroke="#6ee7b7" stroke-width="0.5" />
+
+  <!-- 浏览器 → Nginx 连线 -->
+  <line x1="550" y1="348" x2="550" y2="380" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="558" y="368" font-size="10" fill="#64748b">HTTP :80</text>
+
+  <!-- ==================== Express 后端层 ==================== -->
+  <rect x="340" y="485" width="420" height="70" rx="12" fill="url(#serverGrad)" stroke="#fcd34d" stroke-width="1.5" filter="url(#shadow)" />
+  <text x="550" y="512" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e">⚡ Express :3001</text>
+  <text x="440" y="535" text-anchor="middle" font-size="11" fill="#b45309">Node.js + TypeScript</text>
+  <text x="660" y="535" text-anchor="middle" font-size="11" fill="#b45309">helmet · morgan · cors</text>
+
+  <!-- Nginx → Express 连线 -->
+  <line x1="550" y1="450" x2="550" y2="485" stroke="#64748b" stroke-width="2" marker-end="url(#arrowAmber)" />
+  <text x="558" y="472" font-size="10" fill="#64748b">/api/*</text>
+
+  <!-- ==================== 导出服务层 ==================== -->
+  <!-- Word 导出 -->
+  <rect x="140" y="600" width="220" height="80" rx="10" fill="url(#serviceGrad)" stroke="#f9a8d4" stroke-width="1" filter="url(#shadow)" />
+  <text x="250" y="628" text-anchor="middle" font-size="13" font-weight="600" fill="#9d174d">📄 Word 导出</text>
+  <text x="250" y="648" text-anchor="middle" font-size="11" fill="#be185d">docx 库</text>
+  <text x="250" y="666" text-anchor="middle" font-size="11" fill="#64748b">标题 · 表格 · 列表 · 代码块</text>
+
+  <!-- Excel 导出 -->
+  <rect x="440" y="600" width="220" height="80" rx="10" fill="url(#serviceGrad)" stroke="#f9a8d4" stroke-width="1" filter="url(#shadow)" />
+  <text x="550" y="628" text-anchor="middle" font-size="13" font-weight="600" fill="#9d174d">📊 Excel 导出</text>
+  <text x="550" y="648" text-anchor="middle" font-size="11" fill="#be185d">exceljs 库</text>
+  <text x="550" y="666" text-anchor="middle" font-size="11" fill="#64748b">表格提取 · 样式美化</text>
+
+  <!-- PDF 导出 -->
+  <rect x="740" y="600" width="220" height="80" rx="10" fill="url(#serviceGrad)" stroke="#f9a8d4" stroke-width="1" filter="url(#shadow)" />
+  <text x="850" y="628" text-anchor="middle" font-size="13" font-weight="600" fill="#9d174d">📑 PDF 导出</text>
+  <text x="850" y="648" text-anchor="middle" font-size="11" fill="#be185d">Puppeteer + Chromium</text>
+  <text x="850" y="666" text-anchor="middle" font-size="11" fill="#64748b">页眉页脚 · 高保真渲染</text>
+
+  <!-- Express → 导出服务连线 -->
+  <line x1="460" y1="555" x2="250" y2="600" stroke="#ec4899" stroke-width="1.5" marker-end="url(#arrowPink)" />
+  <line x1="550" y1="555" x2="550" y2="600" stroke="#ec4899" stroke-width="1.5" marker-end="url(#arrowPink)" />
+  <line x1="640" y1="555" x2="850" y2="600" stroke="#ec4899" stroke-width="1.5" marker-end="url(#arrowPink)" />
+
+  <!-- ==================== Docker 容器标注 ==================== -->
+  <rect x="310" y="360" width="490" height="215" rx="16" fill="none" stroke="#06b6d4" stroke-width="2" stroke-dasharray="8 4" />
+  <rect x="316" y="355" width="160" height="20" rx="4" fill="url(#dockerGrad)" stroke="#06b6d4" stroke-width="1" />
+  <text x="396" y="369" text-anchor="middle" font-size="11" font-weight="600" fill="#0e7490">🐳 Docker Compose</text>
+
+  <!-- ==================== 数据流标注 ==================== -->
+  <!-- 返回流 -->
+  <path d="M 250 680 L 250 740 Q 250 760 270 760 L 830 760 Q 850 760 850 740 L 850 680" fill="none" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arrow)" />
+  <text x="550" y="780" text-anchor="middle" font-size="11" fill="#7c3aed">⬆ 二进制流返回浏览器 → file-saver 下载</text>
+
+  <!-- ==================== 图例 ==================== -->
+  <rect x="40" y="738" width="240" height="72" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1" filter="url(#shadowLight)" />
+  <text x="60" y="758" font-size="11" font-weight="600" fill="#475569">图例</text>
+  <rect x="55" y="766" width="14" height="10" rx="3" fill="url(#browserGrad)" stroke="#93c5fd" stroke-width="0.5" />
+  <text x="76" y="775" font-size="10" fill="#64748b">前端层</text>
+  <rect x="130" y="766" width="14" height="10" rx="3" fill="url(#nginxGrad)" stroke="#6ee7b7" stroke-width="0.5" />
+  <text x="151" y="775" font-size="10" fill="#64748b">网关层</text>
+  <rect x="205" y="766" width="14" height="10" rx="3" fill="url(#serverGrad)" stroke="#fcd34d" stroke-width="0.5" />
+  <text x="226" y="775" font-size="10" fill="#64748b">服务层</text>
+  <rect x="55" y="786" width="14" height="10" rx="3" fill="url(#serviceGrad)" stroke="#f9a8d4" stroke-width="0.5" />
+  <text x="76" y="795" font-size="10" fill="#64748b">导出服务</text>
+  <rect x="150" y="786" width="14" height="10" rx="3" fill="url(#storageGrad)" stroke="#818cf8" stroke-width="0.5" />
+  <text x="171" y="795" font-size="10" fill="#64748b">存储</text>
+  <line x1="225" y1="792" x2="255" y2="792" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="4 2" />
+  <text x="262" y="795" font-size="10" fill="#64748b">容器</text>
+</svg>
