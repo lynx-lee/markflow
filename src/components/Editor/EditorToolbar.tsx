@@ -1,8 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   FiBold, FiItalic, FiCode, FiLink, FiImage, FiList,
   FiColumns, FiEdit3, FiEye,
-  FiSun, FiMoon
+  FiSun, FiMoon, FiHome
 } from 'react-icons/fi';
 import ExportButton from '../Export/ExportButton';
 import { useEditorStore } from '../../stores/editorStore';
@@ -37,6 +38,7 @@ const ToolbarButton: React.FC<{
 const EditorToolbar: React.FC<EditorToolbarProps> = ({ viewMode, onViewModeChange }) => {
   const { wordCount, insertText } = useEditorStore();
   const { theme, toggleTheme } = useTheme();
+  const navigate = useNavigate();
 
   const markdownActions = [
     { icon: <FiBold size={16} />, label: '粗体 (Ctrl+B)', insert: '**粗体文本**' },
@@ -51,8 +53,16 @@ const EditorToolbar: React.FC<EditorToolbarProps> = ({ viewMode, onViewModeChang
     <div className="flex items-center justify-between px-4 py-2
                     border-b border-gray-200 dark:border-gray-700
                     bg-white dark:bg-gray-800">
-      {/* 左侧 - Markdown 快捷操作 */}
+      {/* 左侧 - 返回首页 + Markdown 快捷操作 */}
       <div className="flex items-center gap-1">
+        <ToolbarButton
+          icon={<FiHome size={16} />}
+          label="返回首页"
+          onClick={() => navigate('/')}
+        />
+
+        <div className="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-2" />
+
         {markdownActions.map((action, i) => (
           <ToolbarButton
             key={i}
