@@ -279,6 +279,23 @@ docker compose up --build
 
 ## 更新日志
 
+### V1.0.1 (2026-02-25)
+
+#### 修复
+- 修复 Excel 导出时工作表名称包含 Markdown 标记（`**`）及非法字符（`* ? : \ / [ ]`）导致导出失败的问题
+- 修复 Excel 导出时单元格内容保留 Markdown 标记（粗体、斜体、删除线、链接、代码等）的问题，现导出为纯文本
+- 修复 `marked` Renderer `code` 方法类型签名不兼容导致 TypeScript 编译失败的问题
+- 修复 Docker 构建时 Puppeteer 自动下载 Chromium 因网络不通导致失败的问题（改用系统 Chromium）
+- 修复 `.dockerignore` 包含中文字符导致 BuildKit 报错的问题
+
+#### 改进
+- 编辑器工具栏新增返回首页按钮
+- 网站图标从 favicon.ico 更新为 SVG 格式
+- deploy.sh 脚本全面重构：新增 Banner、update / health / exec 命令、服务参数化、深度清理、资源状态监控
+- deploy.sh 兼容 Docker Compose V1 和 V2
+- docker-compose.yml 新增 `container_name` 和 `image` 命名
+- 新增系统架构 SVG 图，README 中引用替代 ASCII 架构图
+
 ### V1.0.0 (2026-02-25)
 
 **首个正式版本发布**
