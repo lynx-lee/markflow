@@ -277,6 +277,46 @@ docker compose up --build
 
 ---
 
+## 更新日志
+
+### V1.0.0 (2026-02-25)
+
+**首个正式版本发布**
+
+#### 核心编辑
+- 基于 CodeMirror 6 的 Markdown 实时编辑器，支持语法高亮、行号、代码折叠
+- 实时预览（marked + highlight.js + DOMPurify XSS 过滤）
+- GFM 支持（表格、任务列表、删除线、围栏代码块）
+- 三种视图模式：仅编辑 / 分屏 / 仅预览
+- 可拖拽分屏比例（20% ~ 80%）
+
+#### 工具栏与快捷键
+- 工具栏一键插入：粗体、斜体、代码、链接、图片、列表、表格
+- 快捷键支持：Ctrl/Cmd+S 保存、Ctrl/Cmd+B 粗体、Ctrl/Cmd+I 斜体等
+- 实时字数统计
+
+#### 文档管理
+- 多文档创建、切换、删除
+- Zustand + localStorage 自动保存与持久化
+
+#### 多格式导出
+- Word (.docx) — 保留标题、表格、列表、代码块样式
+- Excel (.xlsx) — 自动提取表格，清除 Markdown 标记，样式美化，冻结首行 + 自动筛选
+- PDF (.pdf) — Puppeteer 高保真渲染，支持页眉页脚
+- HTML (.html) — 完整独立页面，前端直接下载
+- Markdown (.md) — 保存源文件，前端直接下载
+
+#### 主题
+- 明暗主题一键切换，编辑器与预览面板同步
+
+#### 部署
+- Docker 容器化（前端 Nginx + 后端 Node.js + Chromium）
+- docker-compose 一键编排，兼容 V1/V2
+- deploy.sh 脚本：start / stop / restart / build / update / logs / status / health / clean / exec
+- 后端健康检查端点 `/api/health`
+
+---
+
 ## License
 
 MIT
