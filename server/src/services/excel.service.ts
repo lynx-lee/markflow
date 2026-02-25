@@ -45,12 +45,12 @@ export class ExcelService {
         const tableToken = token as any;
 
         const headers = tableToken.header.map((cell: any) =>
-          cell.text || this.extractText(cell.tokens)
+          this.stripMarkdown(cell.text || this.extractText(cell.tokens))
         );
 
         const rows = tableToken.rows.map((row: any[]) =>
           row.map((cell: any) =>
-            cell.text || this.extractText(cell.tokens)
+            this.stripMarkdown(cell.text || this.extractText(cell.tokens))
           )
         );
 
@@ -68,6 +68,22 @@ export class ExcelService {
   private extractText(tokens: any[]): string {
     if (!tokens) return '';
     return tokens.map((t: any) => t.text || t.raw || '').join('');
+  }
+
+  /**
+   * 移除文本中的 Markdown 标记，保留纯文本内容
+   */
+  private stripMarkdown(text: string): string {
+    return text
+      .replace(/\*\*\*(.*?)\*\*\*/g, '$1')   // ***粗斜体***
+      .replace(/\*\*(.*?)\*\*/g, '$1')         // **粗体**
+      .replace(/\*(.*?)\*/g, '$1')             // *斜体*
+      .replace(/~~(.*?)~~/g, '$1')             // ~~删除线~~
+      .replace(/`(.*?)`/g, '$1')               // `行内代码`
+      .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1') // [链接](url)
+      .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1') // ![图片](url)
+      .replace(/<[^>]+>/g, '')                  // <html标签>
+      .trim();
   }
 
   private writeTable(sheet: ExcelJS.Worksheet, table: TableData): void {
