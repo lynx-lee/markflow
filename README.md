@@ -279,6 +279,15 @@ docker compose up --build
 
 ## 更新日志
 
+### V1.0.2 (2026-02-26)
+
+#### 安全
+- 将 `.env` 从 git 追踪中移除，防止敏感配置泄露
+- 新增 `.env.example` 环境变量模板供开发者参考
+
+#### 改进
+- 完善 `.gitignore`：新增 `.env`、`.env.*.local`、`.vscode/`、`.idea/`、`*.tsbuildinfo`、`coverage/` 等忽略规则
+
 ### V1.0.1 (2026-02-25)
 
 #### 修复
