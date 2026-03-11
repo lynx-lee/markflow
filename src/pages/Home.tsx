@@ -1,6 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FiEdit3, FiFileText, FiGrid, FiFile, FiCode, FiMoon } from 'react-icons/fi';
+import React, { useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { FiEdit3, FiFileText, FiGrid, FiFile, FiCode, FiMoon, FiUpload } from 'react-icons/fi';
+import { useEditorStore } from '../stores/editorStore';
 
 const features = [
   { icon: <FiEdit3 size={24} />, title: '实时编辑', desc: '基于 CodeMirror 6 的高性能编辑器，支持语法高亮' },
@@ -12,6 +13,39 @@ const features = [
 ];
 
 const Home: React.FC = () => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+  const importDocument = useEditorStore((s) => s.importDocument);
+
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // 验证文件类型
+    if (!file.name.endsWith('.md') && !file.name.endsWith('.markdown') && file.type !== 'text/markdown') {
+      alert('请上传 .md 或 .markdown 格式的文件');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target?.result as string;
+      if (content != null) {
+        const title = file.name.replace(/\.(md|markdown)$/, '');
+        importDocument(title, content);
+        navigate('/editor');
+      }
+    };
+    reader.readAsText(file, 'UTF-8');
+
+    // 清空 input 以便同一文件可再次上传
+    e.target.value = '';
+  };
+
   return (
     <div className="min-h-full bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
       {/* Hero */}
@@ -25,14 +59,33 @@ const Home: React.FC = () => {
         <p className="text-xl text-gray-600 dark:text-gray-400 mb-8 text-center max-w-2xl">
           功能强大的在线 Markdown 编辑器，支持实时预览并导出为 Word / Excel / PDF 等格式
         </p>
-        <Link
-          to="/editor"
-          className="px-8 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 
-                     transition-all shadow-lg hover:shadow-xl text-lg font-medium
-                     hover:-translate-y-0.5"
-        >
-          开始编辑
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link
+            to="/editor"
+            className="px-8 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 
+                       transition-all shadow-lg hover:shadow-xl text-lg font-medium
+                       hover:-translate-y-0.5"
+          >
+            开始编辑
+          </Link>
+          <button
+            onClick={handleUploadClick}
+            className="flex items-center gap-2 px-8 py-3 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400
+                       border-2 border-blue-600 dark:border-blue-400 rounded-xl hover:bg-blue-50 dark:hover:bg-gray-700
+                       transition-all shadow-lg hover:shadow-xl text-lg font-medium
+                       hover:-translate-y-0.5"
+          >
+            <FiUpload size={20} />
+            上传 MD 文件
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".md,.markdown,text/markdown"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+        </div>
       </section>
 
       {/* Features */}

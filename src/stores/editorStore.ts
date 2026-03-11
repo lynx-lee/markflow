@@ -20,6 +20,7 @@ interface EditorState {
   setWordCount: (count: number) => void;
   insertText: (text: string) => void;
   createDocument: (title?: string) => void;
+  importDocument: (title: string, content: string) => string;
   saveDocument: () => void;
   loadDocument: (id: string) => void;
   deleteDocument: (id: string) => void;
@@ -58,6 +59,23 @@ export const useEditorStore = create<EditorState>()(
           content: doc.content,
           isDirty: false,
         }));
+      },
+
+      importDocument: (title: string, content: string) => {
+        const doc: Document = {
+          id: Date.now().toString(36),
+          title,
+          content,
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+        };
+        set((state) => ({
+          documents: [...state.documents, doc],
+          currentDocument: doc,
+          content: doc.content,
+          isDirty: false,
+        }));
+        return doc.id;
       },
 
       saveDocument: () => {
